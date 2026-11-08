@@ -1,0 +1,24 @@
+package com.kwad.sdk.contentalliance.detail.video;
+
+/* loaded from: D:\My-Best-Konfu\kfnt_mod\extracted\classes2.dex */
+public interface d {
+    void a();
+
+    void a(int i, int i2);
+
+    void a(long j, long j2);
+
+    void b();
+
+    void c();
+
+    void d();
+
+    void e();
+
+    void f();
+
+    void g();
+
+    void h();
+}

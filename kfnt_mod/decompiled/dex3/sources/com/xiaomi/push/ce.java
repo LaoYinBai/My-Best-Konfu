@@ -1,0 +1,18 @@
+package com.xiaomi.push;
+
+import com.xiaomi.push.ci;
+
+/* loaded from: D:\My-Best-Konfu\kfnt_mod\extracted\classes3.dex */
+public class ce extends ci.d {
+    protected String a;
+
+    public ce(String str, String str2, String[] strArr, String str3) {
+        super(str, str2, strArr);
+        this.a = "MessageDeleteJob";
+        this.a = str3;
+    }
+
+    public static ce a(String str) {
+        return new ce(str, "status = ?", new String[]{String.valueOf(2)}, "a job build to delete uploaded job");
+    }
+}

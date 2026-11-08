@@ -1,0 +1,111 @@
+package com.bytedance.pangle.activity;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import androidx.appcompat.app.AppCompatViewInflater;
+import com.bytedance.pangle.Zeus;
+import com.bytedance.pangle.log.ZeusLogger;
+import com.bytedance.pangle.plugin.Plugin;
+import com.bytedance.pangle.plugin.PluginManager;
+import com.bytedance.pangle.transform.ZeusTransformUtils;
+import com.bytedance.pangle.util.FieldUtils;
+
+/* loaded from: D:\My-Best-Konfu\kfnt_mod\extracted\classes.dex */
+final class c {
+    static void a(b bVar, Bundle bundle) {
+        if (!Zeus.hasInit()) {
+            Log.e(ZeusLogger.TAG_INIT, "ProxyActivityUtils.onCreate finish. AppApplication == null.");
+            bVar.zeusSuperOnCreate(bundle);
+            bVar.finish();
+            return;
+        }
+        Intent intent = bVar.getIntent();
+        String pluginPkgName = bVar.getPluginPkgName();
+        Plugin plugin = bVar.getPlugin();
+        intent.setExtrasClassLoader(plugin.mClassLoader);
+        String stringExtra = intent.getStringExtra("targetPlugin");
+        if (!plugin.isLoaded() || TextUtils.isEmpty(stringExtra)) {
+            try {
+                bVar.zeusSuperOnCreate(bundle);
+                ZeusLogger.e(ZeusLogger.TAG_ACTIVITY, "Cant start pluginActivity, plugin load failed! pluginPkgName: " + pluginPkgName + " targetActivity: " + stringExtra);
+                bVar.finish();
+                return;
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+        ActivityInfo activityInfo = plugin.pluginActivities.get(stringExtra);
+        if (activityInfo == null) {
+            throw new RuntimeException("Have you declared " + stringExtra + " in plugin's AndroidManifest.xml!");
+        }
+        try {
+            IPluginActivity iPluginActivity = (IPluginActivity) plugin.mClassLoader.loadClass(stringExtra).newInstance();
+            FieldUtils.writeField(iPluginActivity, "mApplication", bVar.getApplication());
+            bVar.setTargetActivity(iPluginActivity);
+            iPluginActivity.setPluginProxyActivity(bVar, plugin);
+            bVar.zeusSuperSetTheme(activityInfo.theme);
+            iPluginActivity.attachBaseContext(bVar.getBaseContext());
+            iPluginActivity.onCreate(bundle);
+        } catch (Exception e2) {
+            throw new RuntimeException(e2);
+        }
+    }
+
+    static void a(b bVar, Context context) {
+        if (!Zeus.hasInit()) {
+            Log.e(ZeusLogger.TAG_INIT, "ProxyActivityUtils.attachBaseContext. AppApplication == null.");
+            bVar.zeusSuperAttachBaseContext(context);
+            return;
+        }
+        String pluginPkgName = bVar.getPluginPkgName();
+        boolean zLoadPlugin = PluginManager.getInstance().loadPlugin(pluginPkgName);
+        try {
+            bVar.setPlugin(PluginManager.getInstance().getPlugin(pluginPkgName));
+            if (zLoadPlugin) {
+                bVar.zeusSuperAttachBaseContext(ZeusTransformUtils.wrapperContext(context, pluginPkgName));
+            } else {
+                bVar.zeusSuperAttachBaseContext(context);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    static void a(Activity activity, View view) {
+        Object field;
+        if (view == null) {
+            return;
+        }
+        try {
+            Object field2 = FieldUtils.readField(view, "mListenerInfo");
+            if (field2 != null && (field = FieldUtils.readField(field2, "mOnClickListener")) != null) {
+                String name = field.getClass().getName();
+                if (name.startsWith(AppCompatViewInflater.class.getName()) || name.startsWith(View.class.getName())) {
+                    view.setOnClickListener(new a(activity, view.getId(), (String) FieldUtils.readField(field, "mMethodName")));
+                }
+            }
+        } catch (Exception e) {
+            ZeusLogger.e(ZeusLogger.TAG_ACTIVITY, "checkOnClickListener failed!".concat(String.valueOf(view)));
+            e.printStackTrace();
+        }
+        if (!(view instanceof ViewGroup)) {
+            return;
+        }
+        int i = 0;
+        while (true) {
+            ViewGroup viewGroup = (ViewGroup) view;
+            if (i >= viewGroup.getChildCount()) {
+                return;
+            }
+            a(activity, viewGroup.getChildAt(i));
+            i++;
+        }
+    }
+}

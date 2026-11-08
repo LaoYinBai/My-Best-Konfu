@@ -1,0 +1,115 @@
+package com.google.firebase.analytics;
+
+import android.os.Bundle;
+import androidx.annotation.Nullable;
+import com.google.android.gms.internal.measurement.zzee;
+import com.google.android.gms.measurement.internal.zzgy;
+import com.google.android.gms.measurement.internal.zzgz;
+import com.google.android.gms.measurement.internal.zzie;
+import java.util.List;
+import java.util.Map;
+
+/* compiled from: com.google.android.gms:play-services-measurement-api@@21.1.1 */
+/* loaded from: D:\My-Best-Konfu\kfnt_mod\extracted\classes2.dex */
+final class zzc implements zzie {
+    final /* synthetic */ zzee zza;
+
+    zzc(zzee zzeeVar) {
+        this.zza = zzeeVar;
+    }
+
+    @Override // com.google.android.gms.measurement.internal.zzie
+    public final int zza(String str) {
+        return this.zza.zza(str);
+    }
+
+    @Override // com.google.android.gms.measurement.internal.zzie
+    public final long zzb() {
+        return this.zza.zzb();
+    }
+
+    @Override // com.google.android.gms.measurement.internal.zzie
+    @Nullable
+    public final Object zzg(int i) {
+        return this.zza.zzh(i);
+    }
+
+    @Override // com.google.android.gms.measurement.internal.zzie
+    @Nullable
+    public final String zzh() {
+        return this.zza.zzl();
+    }
+
+    @Override // com.google.android.gms.measurement.internal.zzie
+    @Nullable
+    public final String zzi() {
+        return this.zza.zzm();
+    }
+
+    @Override // com.google.android.gms.measurement.internal.zzie
+    @Nullable
+    public final String zzj() {
+        return this.zza.zzn();
+    }
+
+    @Override // com.google.android.gms.measurement.internal.zzie
+    @Nullable
+    public final String zzk() {
+        return this.zza.zzo();
+    }
+
+    @Override // com.google.android.gms.measurement.internal.zzie
+    public final List zzm(@Nullable String str, @Nullable String str2) {
+        return this.zza.zzp(str, str2);
+    }
+
+    @Override // com.google.android.gms.measurement.internal.zzie
+    public final Map zzo(@Nullable String str, @Nullable String str2, boolean z) {
+        return this.zza.zzq(str, str2, z);
+    }
+
+    @Override // com.google.android.gms.measurement.internal.zzie
+    public final void zzp(String str) {
+        this.zza.zzu(str);
+    }
+
+    @Override // com.google.android.gms.measurement.internal.zzie
+    public final void zzq(String str, @Nullable String str2, @Nullable Bundle bundle) {
+        this.zza.zzv(str, str2, bundle);
+    }
+
+    @Override // com.google.android.gms.measurement.internal.zzie
+    public final void zzr(String str) {
+        this.zza.zzw(str);
+    }
+
+    @Override // com.google.android.gms.measurement.internal.zzie
+    public final void zzs(String str, String str2, Bundle bundle) {
+        this.zza.zzy(str, str2, bundle);
+    }
+
+    @Override // com.google.android.gms.measurement.internal.zzie
+    public final void zzt(String str, String str2, Bundle bundle, long j) {
+        this.zza.zzz(str, str2, bundle, j);
+    }
+
+    @Override // com.google.android.gms.measurement.internal.zzie
+    public final void zzu(zzgz zzgzVar) {
+        this.zza.zzB(zzgzVar);
+    }
+
+    @Override // com.google.android.gms.measurement.internal.zzie
+    public final void zzv(Bundle bundle) {
+        this.zza.zzD(bundle);
+    }
+
+    @Override // com.google.android.gms.measurement.internal.zzie
+    public final void zzw(zzgy zzgyVar) {
+        this.zza.zzJ(zzgyVar);
+    }
+
+    @Override // com.google.android.gms.measurement.internal.zzie
+    public final void zzx(zzgz zzgzVar) {
+        this.zza.zzO(zzgzVar);
+    }
+}

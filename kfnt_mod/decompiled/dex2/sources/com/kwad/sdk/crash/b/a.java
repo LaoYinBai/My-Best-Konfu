@@ -1,0 +1,31 @@
+package com.kwad.sdk.crash.b;
+
+import androidx.annotation.NonNull;
+import com.kwad.sdk.crash.model.message.CaughtExceptionMessage;
+import com.kwad.sdk.crash.model.message.ExceptionMessage;
+import com.kwad.sdk.crash.utils.f;
+import java.util.ArrayList;
+import java.util.UUID;
+
+/* loaded from: D:\My-Best-Konfu\kfnt_mod\extracted\classes2.dex */
+public final class a {
+    private static int a() {
+        return 2;
+    }
+
+    private static void a(ExceptionMessage exceptionMessage) {
+        com.kwad.sdk.core.d.a.a("ExceptionCollector", "upload msg=" + exceptionMessage);
+        ArrayList arrayList = new ArrayList(1);
+        arrayList.add(com.kwad.sdk.crash.report.request.c.a(exceptionMessage));
+        new com.kwad.sdk.crash.report.request.b().a(arrayList);
+    }
+
+    public static void a(@NonNull Throwable th) throws Throwable {
+        CaughtExceptionMessage caughtExceptionMessage = new CaughtExceptionMessage();
+        caughtExceptionMessage.mLogUUID = UUID.randomUUID().toString();
+        caughtExceptionMessage.mCrashDetail = th.toString();
+        f.a(th, caughtExceptionMessage, com.kwad.sdk.crash.d.a().f());
+        f.a(caughtExceptionMessage, a());
+        a(caughtExceptionMessage);
+    }
+}

@@ -1,0 +1,20 @@
+package com.kwad.sdk.api.model;
+
+/* loaded from: D:\My-Best-Konfu\kfnt_mod\extracted\classes2.dex */
+public interface a {
+    int a();
+
+    int b();
+
+    String c();
+
+    String d();
+
+    String e();
+
+    String f();
+
+    String g();
+
+    long h();
+}

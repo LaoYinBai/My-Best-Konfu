@@ -1,0 +1,100 @@
+package com.kwad.sdk.core.b.kwai;
+
+import com.kwad.sdk.core.response.model.AdInfo;
+import com.kwad.sdk.core.response.model.AdMatrixInfo;
+import com.kwad.sdk.core.response.model.AdProductInfo;
+import com.kwad.sdk.core.response.model.AdStyleInfo;
+import java.util.ArrayList;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+/* loaded from: D:\My-Best-Konfu\kfnt_mod\extracted\classes2.dex */
+public class k implements com.kwad.sdk.core.d<AdInfo> {
+    @Override // com.kwad.sdk.core.d
+    public void a(AdInfo adInfo, JSONObject jSONObject) {
+        if (jSONObject == null) {
+            return;
+        }
+        adInfo.adBaseInfo = new AdInfo.AdBaseInfo();
+        adInfo.adBaseInfo.parseJson(jSONObject.optJSONObject("adBaseInfo"));
+        adInfo.advertiserInfo = new AdInfo.AdvertiserInfo();
+        adInfo.advertiserInfo.parseJson(jSONObject.optJSONObject("advertiserInfo"));
+        adInfo.adConversionInfo = new AdInfo.AdConversionInfo();
+        adInfo.adConversionInfo.parseJson(jSONObject.optJSONObject("adConversionInfo"));
+        adInfo.adMaterialInfo = new AdInfo.AdMaterialInfo();
+        adInfo.adMaterialInfo.parseJson(jSONObject.optJSONObject("adMaterialInfo"));
+        adInfo.adTrackInfoList = new ArrayList();
+        JSONArray jSONArrayOptJSONArray = jSONObject.optJSONArray("adTrackInfo");
+        if (jSONArrayOptJSONArray != null) {
+            for (int i = 0; i < jSONArrayOptJSONArray.length(); i++) {
+                AdInfo.AdTrackInfo adTrackInfo = new AdInfo.AdTrackInfo();
+                adTrackInfo.parseJson(jSONArrayOptJSONArray.optJSONObject(i));
+                adInfo.adTrackInfoList.add(adTrackInfo);
+            }
+        }
+        adInfo.downloadSafeInfo = new AdInfo.DownloadSafeInfo();
+        adInfo.downloadSafeInfo.parseJson(jSONObject.optJSONObject("downloadSafeInfo"));
+        adInfo.status = jSONObject.optInt("status");
+        adInfo.progress = jSONObject.optInt("progress");
+        adInfo.soFarBytes = jSONObject.optLong("soFarBytes");
+        adInfo.totalBytes = jSONObject.optLong("totalBytes");
+        adInfo.downloadFilePath = jSONObject.optString("downloadFilePath");
+        if (jSONObject.opt("downloadFilePath") == JSONObject.NULL) {
+            adInfo.downloadFilePath = "";
+        }
+        adInfo.downloadId = jSONObject.optString("downloadId");
+        if (jSONObject.opt("downloadId") == JSONObject.NULL) {
+            adInfo.downloadId = "";
+        }
+        adInfo.adPreloadInfo = new AdInfo.AdPreloadInfo();
+        adInfo.adPreloadInfo.parseJson(jSONObject.optJSONObject("adPreloadInfo"));
+        adInfo.adSplashInfo = new AdInfo.AdSplashInfo();
+        adInfo.adSplashInfo.parseJson(jSONObject.optJSONObject("adSplashInfo"));
+        adInfo.adStyleInfo = new AdStyleInfo();
+        adInfo.adStyleInfo.parseJson(jSONObject.optJSONObject("adStyleInfo"));
+        adInfo.adStyleInfo2 = new AdStyleInfo();
+        adInfo.adStyleInfo2.parseJson(jSONObject.optJSONObject("adStyleInfo2"));
+        adInfo.adAggregateInfo = new AdInfo.AdAggregateInfo();
+        adInfo.adAggregateInfo.parseJson(jSONObject.optJSONObject("adAggregateInfo"));
+        adInfo.adRewardInfo = new AdInfo.AdRewardInfo();
+        adInfo.adRewardInfo.parseJson(jSONObject.optJSONObject("adRewardInfo"));
+        adInfo.adInsertScreenInfo = new AdInfo.AdInsertScreenInfo();
+        adInfo.adInsertScreenInfo.parseJson(jSONObject.optJSONObject("adInsertScreenInfo"));
+        adInfo.adProductInfo = new AdProductInfo();
+        adInfo.adProductInfo.parseJson(jSONObject.optJSONObject("adProductInfo"));
+        adInfo.ocpcActionType = jSONObject.optInt("ocpcActionType");
+        adInfo.adMatrixInfo = new AdMatrixInfo();
+        adInfo.adMatrixInfo.parseJson(jSONObject.optJSONObject("adMatrixInfo"));
+    }
+
+    @Override // com.kwad.sdk.core.d
+    public JSONObject b(AdInfo adInfo, JSONObject jSONObject) throws JSONException {
+        if (jSONObject == null) {
+            jSONObject = new JSONObject();
+        }
+        com.kwad.sdk.utils.t.a(jSONObject, "adBaseInfo", adInfo.adBaseInfo);
+        com.kwad.sdk.utils.t.a(jSONObject, "advertiserInfo", adInfo.advertiserInfo);
+        com.kwad.sdk.utils.t.a(jSONObject, "adConversionInfo", adInfo.adConversionInfo);
+        com.kwad.sdk.utils.t.a(jSONObject, "adMaterialInfo", adInfo.adMaterialInfo);
+        com.kwad.sdk.utils.t.a(jSONObject, "adTrackInfo", adInfo.adTrackInfoList);
+        com.kwad.sdk.utils.t.a(jSONObject, "downloadSafeInfo", adInfo.downloadSafeInfo);
+        com.kwad.sdk.utils.t.a(jSONObject, "status", adInfo.status);
+        com.kwad.sdk.utils.t.a(jSONObject, "progress", adInfo.progress);
+        com.kwad.sdk.utils.t.a(jSONObject, "soFarBytes", adInfo.soFarBytes);
+        com.kwad.sdk.utils.t.a(jSONObject, "totalBytes", adInfo.totalBytes);
+        com.kwad.sdk.utils.t.a(jSONObject, "downloadFilePath", adInfo.downloadFilePath);
+        com.kwad.sdk.utils.t.a(jSONObject, "downloadId", adInfo.downloadId);
+        com.kwad.sdk.utils.t.a(jSONObject, "adPreloadInfo", adInfo.adPreloadInfo);
+        com.kwad.sdk.utils.t.a(jSONObject, "adSplashInfo", adInfo.adSplashInfo);
+        com.kwad.sdk.utils.t.a(jSONObject, "adStyleInfo", adInfo.adStyleInfo);
+        com.kwad.sdk.utils.t.a(jSONObject, "adStyleInfo2", adInfo.adStyleInfo2);
+        com.kwad.sdk.utils.t.a(jSONObject, "adAggregateInfo", adInfo.adAggregateInfo);
+        com.kwad.sdk.utils.t.a(jSONObject, "adRewardInfo", adInfo.adRewardInfo);
+        com.kwad.sdk.utils.t.a(jSONObject, "adInsertScreenInfo", adInfo.adInsertScreenInfo);
+        com.kwad.sdk.utils.t.a(jSONObject, "adProductInfo", adInfo.adProductInfo);
+        com.kwad.sdk.utils.t.a(jSONObject, "ocpcActionType", adInfo.ocpcActionType);
+        com.kwad.sdk.utils.t.a(jSONObject, "adMatrixInfo", adInfo.adMatrixInfo);
+        return jSONObject;
+    }
+}

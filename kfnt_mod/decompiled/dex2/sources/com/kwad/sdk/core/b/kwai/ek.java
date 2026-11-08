@@ -1,0 +1,29 @@
+package com.kwad.sdk.core.b.kwai;
+
+import com.kwad.sdk.core.scene.URLPackage;
+import org.json.JSONObject;
+
+/* loaded from: D:\My-Best-Konfu\kfnt_mod\extracted\classes2.dex */
+public class ek implements com.kwad.sdk.core.d<URLPackage> {
+    @Override // com.kwad.sdk.core.d
+    public void a(URLPackage uRLPackage, JSONObject jSONObject) {
+        if (jSONObject == null) {
+            return;
+        }
+        uRLPackage.page = jSONObject.optInt("page");
+        uRLPackage.identity = jSONObject.optString("identity");
+        if (jSONObject.opt("identity") == JSONObject.NULL) {
+            uRLPackage.identity = "";
+        }
+    }
+
+    @Override // com.kwad.sdk.core.d
+    public JSONObject b(URLPackage uRLPackage, JSONObject jSONObject) {
+        if (jSONObject == null) {
+            jSONObject = new JSONObject();
+        }
+        com.kwad.sdk.utils.t.a(jSONObject, "page", uRLPackage.page);
+        com.kwad.sdk.utils.t.a(jSONObject, "identity", uRLPackage.identity);
+        return jSONObject;
+    }
+}

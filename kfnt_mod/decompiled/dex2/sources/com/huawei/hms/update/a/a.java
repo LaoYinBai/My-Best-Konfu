@@ -1,0 +1,56 @@
+package com.huawei.hms.update.a;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+
+/* loaded from: D:\My-Best-Konfu\kfnt_mod\extracted\classes2.dex */
+class a {
+    private String a;
+    private int b;
+    private String c;
+    private int d;
+
+    a() {
+    }
+
+    public void a(Context context, String str) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("com.huawei.hms.update.DOWNLOAD_RECORD" + str, 0);
+        this.a = sharedPreferences.getString("mUri", "");
+        this.b = sharedPreferences.getInt("mSize", 0);
+        this.c = sharedPreferences.getString("mHash", "");
+        this.d = sharedPreferences.getInt("mReceived", 0);
+    }
+
+    public void a(String str, int i, String str2) {
+        this.a = str;
+        this.b = i;
+        this.c = str2;
+        this.d = 0;
+    }
+
+    public void a(Context context, int i, String str) {
+        this.d = i;
+        b(context, str);
+    }
+
+    private void b(Context context, String str) {
+        SharedPreferences.Editor editorEdit = context.getSharedPreferences("com.huawei.hms.update.DOWNLOAD_RECORD" + str, 0).edit();
+        editorEdit.putString("mUri", this.a);
+        editorEdit.putInt("mSize", this.b);
+        editorEdit.putString("mHash", this.c);
+        editorEdit.putInt("mReceived", this.d);
+        editorEdit.commit();
+    }
+
+    public int a() {
+        return this.b;
+    }
+
+    int b() {
+        return this.d;
+    }
+
+    public boolean b(String str, int i, String str2) {
+        return str != null && str2 != null && this.a != null && this.a.equals(str) && this.b == i && this.c != null && this.c.equals(str2) && this.d <= this.b;
+    }
+}

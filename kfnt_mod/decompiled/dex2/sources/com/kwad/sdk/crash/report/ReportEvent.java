@@ -1,0 +1,120 @@
+package com.kwad.sdk.crash.report;
+
+import androidx.annotation.Nullable;
+import com.heytap.mcssdk.mode.CommandMessage;
+import com.heytap.mcssdk.mode.Message;
+import com.kwad.sdk.utils.t;
+import java.io.Serializable;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+/* loaded from: D:\My-Best-Konfu\kfnt_mod\extracted\classes2.dex */
+public class ReportEvent implements com.kwad.sdk.core.b, Serializable {
+    private static final long serialVersionUID = 8652448382850235426L;
+    public long clientIncrementId;
+    public long clientTimeStamp;
+    public String sessionId;
+    public StatPackage statPackage;
+    public String timeZone;
+
+    public static class ExceptionEvent implements com.kwad.sdk.core.b, Serializable {
+        private static final long serialVersionUID = 5177557263564436344L;
+        public String flag;
+        public String message;
+        public int type;
+        public UrlPackage urlPackage;
+
+        @Override // com.kwad.sdk.core.b
+        public void parseJson(@Nullable JSONObject jSONObject) {
+            if (jSONObject == null) {
+                return;
+            }
+            this.type = jSONObject.optInt(Message.TYPE);
+            this.message = jSONObject.optString("message");
+            this.urlPackage.parseJson(jSONObject.optJSONObject("urlPackage"));
+            this.flag = jSONObject.optString("flag");
+        }
+
+        @Override // com.kwad.sdk.core.b
+        public JSONObject toJson() throws JSONException {
+            JSONObject jSONObject = new JSONObject();
+            t.a(jSONObject, Message.TYPE, this.type);
+            t.a(jSONObject, "message", this.message);
+            t.a(jSONObject, "urlPackage", this.urlPackage);
+            t.a(jSONObject, "flag", this.flag);
+            return jSONObject;
+        }
+    }
+
+    public static class StatPackage implements com.kwad.sdk.core.b, Serializable {
+        private static final long serialVersionUID = -6225392281821567840L;
+        public ExceptionEvent exceptionEvent;
+
+        @Override // com.kwad.sdk.core.b
+        public void parseJson(@Nullable JSONObject jSONObject) {
+            if (jSONObject == null) {
+                return;
+            }
+            this.exceptionEvent.parseJson(jSONObject.optJSONObject("exceptionEvent"));
+        }
+
+        @Override // com.kwad.sdk.core.b
+        public JSONObject toJson() throws JSONException {
+            JSONObject jSONObject = new JSONObject();
+            t.a(jSONObject, "exceptionEvent", this.exceptionEvent);
+            return jSONObject;
+        }
+    }
+
+    public static class UrlPackage implements com.kwad.sdk.core.b, Serializable {
+        private static final long serialVersionUID = 2535768638193007414L;
+        public String identity;
+        public String page;
+        public int pageType;
+        public String params;
+
+        @Override // com.kwad.sdk.core.b
+        public void parseJson(@Nullable JSONObject jSONObject) {
+            if (jSONObject == null) {
+                return;
+            }
+            this.page = jSONObject.optString("page");
+            this.params = jSONObject.optString(CommandMessage.PARAMS);
+            this.identity = jSONObject.optString("identity");
+            this.pageType = jSONObject.optInt("pageType");
+        }
+
+        @Override // com.kwad.sdk.core.b
+        public JSONObject toJson() {
+            JSONObject jSONObject = new JSONObject();
+            t.a(jSONObject, "page", this.page);
+            t.a(jSONObject, CommandMessage.PARAMS, this.params);
+            t.a(jSONObject, "identity", this.identity);
+            t.a(jSONObject, "pageType", this.pageType);
+            return jSONObject;
+        }
+    }
+
+    @Override // com.kwad.sdk.core.b
+    public void parseJson(@Nullable JSONObject jSONObject) {
+        if (jSONObject == null) {
+            return;
+        }
+        this.clientTimeStamp = jSONObject.optLong("clientTimeStamp");
+        this.clientIncrementId = jSONObject.optLong("clientIncrementId");
+        this.sessionId = jSONObject.optString("sessionId");
+        this.statPackage.parseJson(jSONObject.optJSONObject("statPackage"));
+        this.timeZone = jSONObject.optString("timeZone");
+    }
+
+    @Override // com.kwad.sdk.core.b
+    public JSONObject toJson() throws JSONException {
+        JSONObject jSONObject = new JSONObject();
+        t.a(jSONObject, "clientTimeStamp", this.clientTimeStamp);
+        t.a(jSONObject, "clientIncrementId", this.clientIncrementId);
+        t.a(jSONObject, "sessionId", this.sessionId);
+        t.a(jSONObject, "statPackage", this.statPackage);
+        t.a(jSONObject, "timeZone", this.timeZone);
+        return jSONObject;
+    }
+}

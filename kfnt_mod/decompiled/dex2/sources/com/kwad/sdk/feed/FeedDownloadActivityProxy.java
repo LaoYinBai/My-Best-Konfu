@@ -1,0 +1,160 @@
+package com.kwad.sdk.feed;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import androidx.annotation.Keep;
+import androidx.annotation.NonNull;
+import com.kwad.sdk.KsAdSDKImpl;
+import com.kwad.sdk.R;
+import com.kwad.sdk.api.core.KsAdSdkDynamicImpl;
+import com.kwad.sdk.api.proxy.app.FeedDownloadActivity;
+import com.kwad.sdk.core.download.a.a;
+import com.kwad.sdk.core.download.a.c;
+import com.kwad.sdk.core.page.widget.TextProgressBar;
+import com.kwad.sdk.core.response.a.d;
+import com.kwad.sdk.core.response.model.AdInfo;
+import com.kwad.sdk.core.response.model.AdTemplate;
+import com.kwad.sdk.core.view.KsAdContainer;
+import com.kwad.sdk.feed.widget.base.a;
+import com.kwad.sdk.reward.widget.tailframe.appbar.TailFrameBarAppPortraitVertical;
+import org.json.JSONObject;
+
+@KsAdSdkDynamicImpl(FeedDownloadActivity.class)
+@Keep
+/* loaded from: D:\My-Best-Konfu\kfnt_mod\extracted\classes2.dex */
+public class FeedDownloadActivityProxy extends com.kwad.sdk.h.a implements View.OnClickListener {
+    private static final boolean DEBUG = false;
+    public static final String KEY_AD_DATA = "key_template_json";
+    private static final String TAG = "FeedDownloadActivity";
+    private static a.InterfaceC0062a sInnerAdInteractionListener;
+    private KsAdContainer mAdContainer;
+    private AdInfo mAdInfo;
+    private AdTemplate mAdTemplate;
+    private com.kwad.sdk.core.download.a.b mApkDownloadHelper;
+    private TailFrameBarAppPortraitVertical mAppTailFrameView;
+    private Activity mContext;
+    private TextProgressBar mProgressBarTv;
+
+    private void bindDownloadListener() {
+        this.mApkDownloadHelper = new com.kwad.sdk.core.download.a.b(this.mAdTemplate, null, new c() { // from class: com.kwad.sdk.feed.FeedDownloadActivityProxy.1
+            @Override // com.kwad.sdk.core.download.a.c
+            public void a(int i) {
+                FeedDownloadActivityProxy.this.mAppTailFrameView.a(FeedDownloadActivityProxy.this.mAdInfo);
+                FeedDownloadActivityProxy.this.mProgressBarTv.a(com.kwad.sdk.core.response.a.a.b(i), i);
+            }
+
+            @Override // com.kwad.sdk.api.KsAppDownloadListener
+            public void onDownloadFailed() {
+                FeedDownloadActivityProxy.this.mAppTailFrameView.a(FeedDownloadActivityProxy.this.mAdInfo);
+                FeedDownloadActivityProxy.this.mProgressBarTv.a(com.kwad.sdk.core.response.a.a.A(FeedDownloadActivityProxy.this.mAdInfo), FeedDownloadActivityProxy.this.mProgressBarTv.getMax());
+            }
+
+            @Override // com.kwad.sdk.api.KsAppDownloadListener
+            public void onDownloadFinished() {
+                FeedDownloadActivityProxy.this.mAppTailFrameView.a(FeedDownloadActivityProxy.this.mAdInfo);
+                FeedDownloadActivityProxy.this.mProgressBarTv.a(com.kwad.sdk.core.response.a.a.a(FeedDownloadActivityProxy.this.mAdTemplate), FeedDownloadActivityProxy.this.mProgressBarTv.getMax());
+            }
+
+            @Override // com.kwad.sdk.api.KsAppDownloadListener
+            public void onIdle() {
+                FeedDownloadActivityProxy.this.mAppTailFrameView.a(FeedDownloadActivityProxy.this.mAdInfo);
+                FeedDownloadActivityProxy.this.mProgressBarTv.a(com.kwad.sdk.core.response.a.a.A(FeedDownloadActivityProxy.this.mAdInfo), FeedDownloadActivityProxy.this.mProgressBarTv.getMax());
+            }
+
+            @Override // com.kwad.sdk.api.KsAppDownloadListener
+            public void onInstalled() {
+                FeedDownloadActivityProxy.this.mAppTailFrameView.a(FeedDownloadActivityProxy.this.mAdInfo);
+                FeedDownloadActivityProxy.this.mProgressBarTv.a(com.kwad.sdk.core.response.a.a.m(FeedDownloadActivityProxy.this.mAdInfo), FeedDownloadActivityProxy.this.mProgressBarTv.getMax());
+            }
+
+            @Override // com.kwad.sdk.api.KsAppDownloadListener
+            public void onProgressUpdate(int i) {
+                FeedDownloadActivityProxy.this.mAppTailFrameView.a(FeedDownloadActivityProxy.this.mAdInfo);
+                FeedDownloadActivityProxy.this.mProgressBarTv.a(com.kwad.sdk.core.response.a.a.a(i), i);
+            }
+        });
+    }
+
+    private boolean initData() {
+        String stringExtra = getIntent().getStringExtra("key_template_json");
+        try {
+            AdTemplate adTemplate = new AdTemplate();
+            adTemplate.parseJson(new JSONObject(stringExtra));
+            this.mAdTemplate = adTemplate;
+        } catch (Throwable th) {
+            com.kwad.sdk.core.d.a.a(th);
+        }
+        if (this.mAdTemplate == null) {
+            this.mContext.finish();
+            return false;
+        }
+        this.mAdInfo = d.j(this.mAdTemplate);
+        return true;
+    }
+
+    private void intiView() {
+        this.mAdContainer = (KsAdContainer) this.mContext.findViewById(R.id.ksad_container);
+        this.mAdContainer.setOnClickListener(this);
+        this.mAppTailFrameView = (TailFrameBarAppPortraitVertical) this.mContext.findViewById(R.id.ksad_download_container);
+        this.mAppTailFrameView.a(this.mAdTemplate);
+        this.mAppTailFrameView.a(d.j(this.mAdTemplate));
+        this.mAppTailFrameView.setVisibility(0);
+        this.mProgressBarTv = this.mAppTailFrameView.getTextProgressBar();
+        this.mProgressBarTv.setOnClickListener(this);
+        bindDownloadListener();
+    }
+
+    public static void launch(Context context, @NonNull AdTemplate adTemplate, a.InterfaceC0062a interfaceC0062a) {
+        KsAdSDKImpl.putComponentProxy(FeedDownloadActivity.class, FeedDownloadActivityProxy.class);
+        Intent intent = new Intent(context, (Class<?>) FeedDownloadActivity.class);
+        intent.setFlags(268435456);
+        intent.putExtra("key_template_json", adTemplate.toJson().toString());
+        sInnerAdInteractionListener = interfaceC0062a;
+        context.startActivity(intent);
+    }
+
+    /* JADX INFO: Access modifiers changed from: private */
+    public void notifyAdClick() {
+        com.kwad.sdk.core.report.a.a(this.mAdTemplate, this.mAdContainer.getTouchCoords());
+        if (sInnerAdInteractionListener != null) {
+            sInnerAdInteractionListener.a();
+        }
+    }
+
+    public void destroy() {
+        if (this.mAppTailFrameView != null) {
+            this.mAppTailFrameView.b();
+            this.mAppTailFrameView.setVisibility(8);
+        }
+    }
+
+    @Override // com.kwad.sdk.h.a
+    protected String getPageName() {
+        return "FeedDownloadActivityProxy";
+    }
+
+    @Override // android.view.View.OnClickListener
+    public void onClick(View view) {
+        com.kwad.sdk.core.download.a.a.a(new a.C0035a(view.getContext()).a(this.mAdTemplate).a(this.mApkDownloadHelper).a(view == this.mProgressBarTv ? 1 : 2).a(view == this.mProgressBarTv).a(new a.b() { // from class: com.kwad.sdk.feed.FeedDownloadActivityProxy.2
+            @Override // com.kwad.sdk.core.download.a.a.b
+            public void a() {
+                FeedDownloadActivityProxy.this.notifyAdClick();
+            }
+        }));
+    }
+
+    @Override // com.kwad.sdk.h.a, com.kwad.sdk.api.proxy.IActivityProxy
+    public void onCreate(Bundle bundle) {
+        super.onCreate(bundle);
+        this.mContext = getActivity();
+        if (!initData()) {
+            this.mContext.finish();
+        } else {
+            setContentView(R.layout.ksad_activity_feed_download);
+            intiView();
+        }
+    }
+}

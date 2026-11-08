@@ -1,0 +1,16 @@
+package com.bytedance.msdk.api.nativeAd;
+
+import com.bytedance.msdk.adapter.listener.ITTAdatperCallback;
+import com.bytedance.msdk.api.v2.ad.nativeAd.GMNativeAd;
+import com.bytedance.msdk.api.v2.ad.nativeAd.GMNativeAdListener;
+import com.bytedance.msdk.api.v2.ad.nativeAd.GMVideoListener;
+
+@Deprecated
+/* loaded from: D:\My-Best-Konfu\kfnt_mod\extracted\classes.dex */
+public interface TTNativeAd extends GMNativeAd {
+    void setTTAdatperCallback(ITTAdatperCallback iTTAdatperCallback);
+
+    void setTTNativeAdListener(GMNativeAdListener gMNativeAdListener);
+
+    void setTTVideoListener(GMVideoListener gMVideoListener);
+}

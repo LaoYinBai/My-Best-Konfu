@@ -1,0 +1,55 @@
+package com.kwad.sdk.pngencrypt.chunk;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/* loaded from: D:\My-Best-Konfu\kfnt_mod\extracted\classes2.dex */
+public class e {
+    final com.kwad.sdk.pngencrypt.k b;
+    List<PngChunk> a = new ArrayList();
+    boolean c = false;
+
+    public e(com.kwad.sdk.pngencrypt.k kVar) {
+        this.b = kVar;
+    }
+
+    protected static List<PngChunk> a(List<PngChunk> list, final String str, final String str2) {
+        return str2 == null ? b.a(list, new c() { // from class: com.kwad.sdk.pngencrypt.chunk.e.1
+            @Override // com.kwad.sdk.pngencrypt.chunk.c
+            public boolean a(PngChunk pngChunk) {
+                return pngChunk.a.equals(str);
+            }
+        }) : b.a(list, new c() { // from class: com.kwad.sdk.pngencrypt.chunk.e.2
+            @Override // com.kwad.sdk.pngencrypt.chunk.c
+            public boolean a(PngChunk pngChunk) {
+                if (!pngChunk.a.equals(str)) {
+                    return false;
+                }
+                if (!(pngChunk instanceof ae) || ((ae) pngChunk).c().equals(str2)) {
+                    return !(pngChunk instanceof x) || ((x) pngChunk).c().equals(str2);
+                }
+                return false;
+            }
+        });
+    }
+
+    public List<PngChunk> a() {
+        return this.a;
+    }
+
+    public List<? extends PngChunk> a(String str, String str2) {
+        return a(this.a, str, str2);
+    }
+
+    public void a(PngChunk pngChunk, int i) {
+        pngChunk.a(i);
+        this.a.add(pngChunk);
+        if (pngChunk.a.equals("PLTE")) {
+            this.c = true;
+        }
+    }
+
+    public String toString() {
+        return "ChunkList: read: " + this.a.size();
+    }
+}

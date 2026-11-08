@@ -1,0 +1,8 @@
+package com.kwad.sdk.design.kwai;
+
+import java.net.URLConnection;
+
+/* loaded from: D:\My-Best-Konfu\kfnt_mod\extracted\classes2.dex */
+public interface a {
+    void a(URLConnection uRLConnection);
+}

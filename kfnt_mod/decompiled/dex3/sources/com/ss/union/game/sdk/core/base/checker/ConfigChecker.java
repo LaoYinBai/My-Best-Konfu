@@ -1,0 +1,12 @@
+package com.ss.union.game.sdk.core.base.checker;
+
+import com.ss.union.game.sdk.core.base.config.AppIdManager;
+import com.ss.union.game.sdk.core.base.config.ConfigManager;
+
+/* loaded from: D:\My-Best-Konfu\kfnt_mod\extracted\classes3.dex */
+public class ConfigChecker extends IChecker {
+    @Override // com.ss.union.game.sdk.core.base.checker.IChecker
+    protected String check() {
+        return "ConfigChecker\nunionID : " + AppIdManager.secretAppId() + "\nmChannel : " + ConfigManager.AppConfig.appChannel() + "\nmAppName : " + ConfigManager.AppConfig.appName() + "\nmIsDebug : " + ConfigManager.AppConfig.isDebug() + "\nisOhayooProduct : " + ConfigManager.AppConfig.appIsOhayooProduct() + "\nisOpenSplashEffect : " + ConfigManager.AppConfig.isOpenSplashEffect() + "\nagTipsType : " + ConfigManager.AppConfig.ageTipsType() + "\nenvCheckSwitch : " + ConfigManager.AppConfig.isOpenEnvCheck() + "\nadSwitch : " + ConfigManager.AppConfig.isOpenAdFunction() + "\nisNoUserLogin : " + ConfigManager.LoginConfig.isNoUserLogin() + "\nloginMode : " + ConfigManager.LoginConfig.loginMode() + "\nnickSystem : " + ConfigManager.LoginConfig.isUseNickNameSystem() + "\ncm_app_id : " + ConfigManager.LoginConfig.oneKeyCMAppID() + "\ncm_app_key : " + ConfigManager.LoginConfig.getOneKeyCMAppKey() + "\ncu_app_id : " + ConfigManager.LoginConfig.oneKeyCUAppID() + "\ncu_app_key : " + ConfigManager.LoginConfig.getOneKeyCUAppKey() + "\nct_app_id : " + ConfigManager.LoginConfig.oneKeyCTAppID() + "\nct_app_key : " + ConfigManager.LoginConfig.getOneKeyCTAppKey() + "\nisOpenPushDebug : " + ConfigManager.PushConfig.isDebug() + "\nhw_app_key : " + ConfigManager.PushConfig.getHw_app_key() + "\nhw_app_id : " + ConfigManager.PushConfig.getHw_app_id() + "\numeng_app_key : " + ConfigManager.PushConfig.getUmeng_app_key() + "\numeng_message_secret : " + ConfigManager.PushConfig.getUmeng_message_secret() + "\nxm_app_key : " + ConfigManager.PushConfig.getXm_app_key() + "\nxm_app_id : " + ConfigManager.PushConfig.getXm_app_id() + "\nmz_app_key : " + ConfigManager.PushConfig.getMz_app_key() + "\nmz_app_id : " + ConfigManager.PushConfig.getMz_app_id() + "\noppo_app_key : " + ConfigManager.PushConfig.getOppo_app_key() + "\noppo_app_secret : " + ConfigManager.PushConfig.getOppo_app_secret() + "\nvivo_app_key : " + ConfigManager.PushConfig.getVivo_app_key() + "\nvivo_app_id : " + ConfigManager.PushConfig.getVivo_app_id() + "\npay_key : " + ConfigManager.PayConfig.getPayKey();
+    }
+}

@@ -1,0 +1,79 @@
+package com.kwai.sodler.lib.kwai;
+
+import android.content.Context;
+import androidx.annotation.NonNull;
+import com.kwai.sodler.lib.j;
+import java.io.File;
+
+/* loaded from: D:\My-Best-Konfu\kfnt_mod\extracted\classes2.dex */
+public abstract class a {
+    protected File a;
+    protected String b;
+    protected String d;
+    protected String e;
+    protected com.kwai.sodler.lib.a.b f;
+    private final String i;
+    private final byte[] h = new byte[0];
+    private boolean g = false;
+    protected com.kwai.sodler.lib.ext.c c = j.a().b();
+
+    public a(String str) {
+        this.i = str;
+        this.b = str;
+    }
+
+    public a a(@NonNull com.kwai.sodler.lib.a.b bVar) {
+        this.f = bVar;
+        return this;
+    }
+
+    public String a() {
+        return this.e;
+    }
+
+    public abstract void a(Context context, String str);
+
+    public void a(String str) {
+        this.e = str;
+    }
+
+    public final void b(String str) {
+        this.d = str;
+    }
+
+    public final boolean b() {
+        boolean z;
+        if (this.g) {
+            return true;
+        }
+        synchronized (this.h) {
+            z = this.g;
+        }
+        return z;
+    }
+
+    public final String c() {
+        return this.d;
+    }
+
+    public void c(String str) {
+        this.b = str;
+    }
+
+    public final void d() {
+        if (this.g) {
+            return;
+        }
+        synchronized (this.h) {
+            this.g = true;
+        }
+    }
+
+    public String e() {
+        return this.i;
+    }
+
+    public String toString() {
+        return "Plugin{, ApkPath = '" + this.i + "'}";
+    }
+}

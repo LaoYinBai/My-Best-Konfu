@@ -1,0 +1,32 @@
+package com.xiaomi.push.service.receivers;
+
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.text.TextUtils;
+import com.xiaomi.channel.commonutils.logger.b;
+import com.xiaomi.push.service.XMPushService;
+import com.xiaomi.push.service.bd;
+import com.xiaomi.push.service.bh;
+
+/* loaded from: D:\My-Best-Konfu\kfnt_mod\extracted\classes3.dex */
+public class PkgDataClearedReceiver extends BroadcastReceiver {
+    @Override // android.content.BroadcastReceiver
+    public void onReceive(Context context, Intent intent) {
+        if (intent == null || !"android.intent.action.PACKAGE_DATA_CLEARED".equals(intent.getAction()) || intent.getData() == null) {
+            return;
+        }
+        String encodedSchemeSpecificPart = intent.getData().getEncodedSchemeSpecificPart();
+        if (TextUtils.isEmpty(encodedSchemeSpecificPart)) {
+            return;
+        }
+        try {
+            Intent intent2 = new Intent(context, (Class<?>) XMPushService.class);
+            intent2.setAction(bd.b);
+            intent2.putExtra("data_cleared_pkg_name", encodedSchemeSpecificPart);
+            bh.a(context).m618a(intent2);
+        } catch (Exception e) {
+            b.d("data cleared broadcast error: " + e);
+        }
+    }
+}

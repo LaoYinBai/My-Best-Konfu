@@ -1,0 +1,10 @@
+package bykvm_19do.bykvm_19do.bykvm_if122.bykvm_for12.bykvm_19do;
+
+/* loaded from: D:\My-Best-Konfu\kfnt_mod\extracted\classes.dex */
+public interface c<T> extends g<T> {
+    void a(T t, String str, int i);
+
+    void a(T t, String str, long j);
+
+    void b(T t);
+}

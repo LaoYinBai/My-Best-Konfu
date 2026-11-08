@@ -1,0 +1,22 @@
+package com.kwai.sodler.lib.a;
+
+import androidx.annotation.NonNull;
+import java.util.HashMap;
+
+/* loaded from: D:\My-Best-Konfu\kfnt_mod\extracted\classes2.dex */
+public class b implements Comparable<b> {
+    public String a;
+    public String b;
+    public String c;
+    public long d;
+    public boolean e;
+    public String f;
+    public boolean g = false;
+    public HashMap<String, String> h = new HashMap<>(10);
+
+    @Override // java.lang.Comparable
+    /* renamed from: a, reason: merged with bridge method [inline-methods] */
+    public int compareTo(@NonNull b bVar) {
+        return -this.b.compareTo(bVar.b);
+    }
+}

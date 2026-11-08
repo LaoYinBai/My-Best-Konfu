@@ -1,0 +1,83 @@
+package com.kwad.sdk.crash;
+
+import androidx.annotation.NonNull;
+import com.kwad.sdk.crash.model.message.ExceptionMessage;
+import com.kwad.sdk.utils.i;
+import java.util.concurrent.TimeUnit;
+
+/* loaded from: D:\My-Best-Konfu\kfnt_mod\extracted\classes2.dex */
+public class a {
+    private static volatile boolean a = false;
+    private static volatile boolean b = false;
+
+    public static synchronized void a() {
+        if (!a) {
+            a = true;
+            com.kwad.sdk.core.i.a.a().postDelayed(new Runnable() { // from class: com.kwad.sdk.crash.a.4
+                @Override // java.lang.Runnable
+                public void run() {
+                    try {
+                        a.d();
+                    } catch (Throwable unused) {
+                    }
+                }
+            }, TimeUnit.SECONDS.toMillis(c.f));
+        }
+    }
+
+    public static void a(@NonNull b bVar) {
+        if (bVar.g == null || b) {
+            return;
+        }
+        b = true;
+        try {
+            com.kwad.sdk.crash.utils.d.a(bVar.g);
+            com.kwad.sdk.crash.kwai.a.a(bVar.g, bVar.n);
+            d.a().a(bVar);
+            c();
+            Thread.setDefaultUncaughtExceptionHandler(new com.kwad.sdk.crash.b.d(bVar.g));
+            a();
+        } catch (Throwable unused) {
+        }
+    }
+
+    public static void a(@NonNull final Throwable th) {
+        i.a(new Runnable() { // from class: com.kwad.sdk.crash.a.1
+            @Override // java.lang.Runnable
+            public void run() {
+                try {
+                    if (com.kwad.sdk.crash.a.a.a(th)) {
+                        com.kwad.sdk.crash.b.a.a(new SdkCaughtException(th));
+                    }
+                } catch (Throwable th2) {
+                    com.kwad.sdk.core.d.a.a(th2);
+                }
+            }
+        });
+    }
+
+    private static void c() {
+        com.kwad.sdk.crash.b.c.d().a(com.kwad.sdk.crash.kwai.a.b(), new e() { // from class: com.kwad.sdk.crash.a.2
+            @Override // com.kwad.sdk.crash.e
+            public void a(int i, ExceptionMessage exceptionMessage) {
+                d.a().a(i, exceptionMessage);
+            }
+        }, new com.kwad.sdk.crash.report.a() { // from class: com.kwad.sdk.crash.a.3
+            @Override // com.kwad.sdk.crash.report.c
+            public void a(ExceptionMessage exceptionMessage) {
+                a(exceptionMessage, 1);
+            }
+        });
+    }
+
+    /* JADX INFO: Access modifiers changed from: private */
+    public static void d() {
+        e();
+    }
+
+    private static void e() {
+        com.kwad.sdk.crash.report.d dVar = new com.kwad.sdk.crash.report.d();
+        dVar.a(com.kwad.sdk.crash.b.c.d().a());
+        dVar.a(com.kwad.sdk.crash.kwai.a.b());
+    }
+}

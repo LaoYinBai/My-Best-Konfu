@@ -1,0 +1,8 @@
+package com.ss.android.download.api.config;
+
+/* loaded from: D:\My-Best-Konfu\kfnt_mod\extracted\classes3.dex */
+public interface IPermissionCallback {
+    void onDenied(String str);
+
+    void onGranted();
+}

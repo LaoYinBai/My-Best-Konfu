@@ -1,0 +1,64 @@
+package com.kwad.sdk.core.download;
+
+import com.kwad.sdk.KsAdSDKImpl;
+
+/* loaded from: D:\My-Best-Konfu\kfnt_mod\extracted\classes2.dex */
+public class b {
+    private static final boolean a = KsAdSDKImpl.get().isDebugLogEnable();
+
+    public static void a(String str) {
+        if (a) {
+            com.kwad.sdk.core.d.a.a("DownloadMonitor", "onDownloadStart(), id=" + str);
+        }
+        DownloadStatusManager.a().a(str);
+    }
+
+    public static void a(String str, int i, int i2, int i3) {
+        if (a) {
+            com.kwad.sdk.core.d.a.a("DownloadMonitor", "onProgressUpdate(), id=" + str + " progress=" + i + " soFarBytes=" + i2 + " totalBytes=" + i3);
+        }
+        DownloadStatusManager.a().a(str, i, i2, i3);
+    }
+
+    public static void a(String str, int i, String str2) {
+        if (a) {
+            com.kwad.sdk.core.d.a.a("DownloadMonitor", "onDownloadFail(), id=" + str + " errorCode=" + i + " errorMsg=" + str2);
+        }
+        DownloadStatusManager.a().a(str, i, str2);
+    }
+
+    public static void a(String str, String str2) {
+        if (a) {
+            com.kwad.sdk.core.d.a.a("DownloadMonitor", "onDownloadFinished(), id=" + str + " filePath=" + str2);
+        }
+        DownloadStatusManager.a().a(str, str2);
+    }
+
+    public static void b(String str) {
+        if (a) {
+            com.kwad.sdk.core.d.a.a("DownloadMonitor", "onDownloadPaused(), id=" + str);
+        }
+        DownloadStatusManager.a().b(str);
+    }
+
+    public static void c(String str) {
+        if (a) {
+            com.kwad.sdk.core.d.a.a("DownloadMonitor", "onDownloadResumed(), id=" + str);
+        }
+        DownloadStatusManager.a().c(str);
+    }
+
+    public static void d(String str) {
+        if (a) {
+            com.kwad.sdk.core.d.a.a("DownloadMonitor", "onDownloadCanceled(), id=" + str);
+        }
+        DownloadStatusManager.a().d(str);
+    }
+
+    public static void e(String str) {
+        if (a) {
+            com.kwad.sdk.core.d.a.a("DownloadMonitor", "onLowStorage(), id=" + str);
+        }
+        DownloadStatusManager.a().e(str);
+    }
+}
