@@ -1,0 +1,17 @@
+# ===== 版权物与游戏本体（严禁入库）=====
+kfnt_apk/
+kfnt_mod/
+*.apk
+*.idsig
+
+# ===== 第三方库与运行时产物 =====
+scripts/pylibs/
+scripts/__pycache__/
+*.pyc
+
+# ===== 临时文件与日志 =====
+*.log
+*.tmp
+tmp/
+.DS_Store
+Thumbs.db
